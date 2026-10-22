@@ -16,7 +16,7 @@ type Config struct {
 func LoadConfig() Config {
 	port := os.Getenv("ZEROBRAND_PORT")
 	if port == "" {
-		port = "8830"
+		port = "18830"
 	}
 	origin := os.Getenv("ZEROBRAND_PUBLIC_ORIGIN")
 	if origin == "" {

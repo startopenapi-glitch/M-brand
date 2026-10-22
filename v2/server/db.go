@@ -11,9 +11,9 @@ import (
 	"path/filepath"
 	"sort"
 
-	"github.com/startopenapi-glitch/M-brand/v2/server/internal/platform"
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgxpool"
+	"github.com/startopenapi-glitch/M-brand/v2/server/internal/platform"
 )
 
 var pool *pgxpool.Pool
@@ -25,13 +25,13 @@ var migrationFS embed.FS
 var webFS embed.FS
 
 func dbURL() string {
-	if u := os.Getenv("ZEROBRAND_PG_URL"); u != "" {
-		return u
-	}
-	return "postgres://zerobrand:" + os.Getenv("ZEROBRAND_PG_PASS") + "@127.0.0.1:5432/zerobrand"
+	return os.Getenv("ZEROBRAND_PG_URL")
 }
 
 func initDB() error {
+	if err := platform.ValidateDatabaseURL(dbURL()); err != nil {
+		return err
+	}
 	var err error
 	pool, err = platform.OpenDB(context.Background(), dbURL())
 	if err != nil {

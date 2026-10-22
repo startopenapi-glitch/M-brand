@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 root=$(cd "$(dirname "$0")/.." && pwd)
+[[ $# -eq 0 ]] || { echo 'build.sh accepts no deployment target; output stays in this project.' >&2; exit 2; }
+python3 "$root/scripts/project_guard.py" "$root"
 command -v zstd >/dev/null || { echo "Install zstd before building." >&2; exit 1; }
 (cd "$root/v2/web" && npm ci --no-audit --no-fund && npm run build)
 python3 - "$root" <<'PY'

@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 root=$(cd "$(dirname "$0")/.." && pwd)
+[[ $# -le 1 && "${1:-all}" =~ ^(all|api|worker)$ ]] || { echo 'Usage: run.sh [all|api|worker]' >&2; exit 2; }
 [[ -x "$root/.local/bin/m-brand" ]] || { echo 'Run bash scripts/build.sh first.' >&2; exit 1; }
 [[ -f "$root/v2/.env" ]] || { echo 'Copy v2/.env.example to v2/.env and configure it first.' >&2; exit 1; }
+python3 "$root/scripts/project_guard.py" "$root" run
 set -a
 source "$root/v2/.env"
 set +a

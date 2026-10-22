@@ -10,6 +10,9 @@ import (
 )
 
 func Main() {
+	if err := platform.ValidateDeploymentConfig(os.Getenv("MBRAND_DEPLOYMENT_ID"), dbURL(), platform.LoadConfig().PublicOrigin); err != nil {
+		log.Fatal("Deployment refused: ", err)
+	}
 	mode := "all"
 	if len(os.Args) > 1 {
 		switch os.Args[1] {

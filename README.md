@@ -36,7 +36,9 @@ caddy run --config deploy/Caddyfile.example --adapter caddyfile
 
 访问 `https://localhost:8443/`，管理端 `/admin`，代理端 `/agent`。本地使用 Caddy 开发证书；需要信任该证书。登录 Cookie 保留 Secure 与 HttpOnly，不能用取消 Cookie 安全属性来绕过 HTTPS。
 
-后端监听本机 `127.0.0.1:8830`，内部 API 前缀保留 `/0brand`；浏览器使用根路径 `/api`，Caddy 示例负责转换。详情见 [部署说明](docs/DEPLOYMENT.md)。
+后端默认监听本机 `127.0.0.1:18830`，内部 API 前缀保留 `/0brand`；浏览器使用根路径 `/api`，Caddy 示例负责转换。详情见 [部署说明](docs/DEPLOYMENT.md)。
+
+启动必须显式设置 `MBRAND_DEPLOYMENT_ID=m-brand` 和独立数据库连接；不再回退连接旧库。程序在读取服务密钥、连接数据库和自动迁移之前拒绝缺失部署身份、旧库名或原站域名。构建/启动脚本也会核对项目身份，拒绝混合运维目录及指向项目外部的配置/输出链接。
 
 ## 邮件、模型与支付
 

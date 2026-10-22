@@ -15,7 +15,7 @@ func TestIDsAndConfigDefaults(t *testing.T) {
 	t.Setenv("ZEROBRAND_PORT", "")
 	t.Setenv("ZEROBRAND_PUBLIC_ORIGIN", "")
 	cfg := LoadConfig()
-	if cfg.Port != "8830" || cfg.PublicOrigin != "https://localhost:8443" {
+	if cfg.Port != "18830" || cfg.PublicOrigin != "https://localhost:8443" {
 		t.Fatalf("bad defaults %+v", cfg)
 	}
 	t.Setenv("ZEROBRAND_PORT", "9999")

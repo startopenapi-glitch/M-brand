@@ -1,4 +1,5 @@
 {
+ admin off
  auto_https disable_redirects
 }
 # Run Caddy on the same host as the Go binary. Local HTTPS example.
@@ -6,11 +7,11 @@ https://localhost:8443 {
  tls internal
  @legacy path /0brand /0brand/*
  handle @legacy {
-  reverse_proxy 127.0.0.1:8830
+  reverse_proxy 127.0.0.1:18830
  }
  handle {
   rewrite * /0brand{uri}
-  reverse_proxy 127.0.0.1:8830
+  reverse_proxy 127.0.0.1:18830
  }
 }
 # Public hosting: use your domain, remove `tls internal`, and set the matching

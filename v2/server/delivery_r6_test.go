@@ -392,7 +392,7 @@ func TestDeliveryR6ActualServiceThreeRestartsAndLateDelivery(t *testing.T) {
 		l.Close()
 		cmd := exec.Command(os.Args[0], "-test.run=^TestDeliveryR6ServiceProcessHelper$")
 		cmd.Dir = t.TempDir()
-		cmd.Env = append(os.Environ(), "R6_SERVICE_CHILD=1", "ZEROBRAND_PORT="+fmt.Sprint(port), "ZEROBRAND_GEN_DIR="+genDir(), "ZEROBRAND_IMG_BASE_URL="+upstream.URL, "ZEROBRAND_IMG_API_KEY=fake-local-only", "ZEROBRAND_IMG_FALLBACK_BASE_URL=", "ZEROBRAND_IMG_FALLBACK_API_KEY=")
+		cmd.Env = append(os.Environ(), "R6_SERVICE_CHILD=1", "MBRAND_DEPLOYMENT_ID=m-brand", "ZEROBRAND_PORT="+fmt.Sprint(port), "ZEROBRAND_GEN_DIR="+genDir(), "ZEROBRAND_IMG_BASE_URL="+upstream.URL, "ZEROBRAND_IMG_API_KEY=fake-local-only", "ZEROBRAND_IMG_FALLBACK_BASE_URL=", "ZEROBRAND_IMG_FALLBACK_API_KEY=")
 		if e = cmd.Start(); e != nil {
 			t.Fatal(e)
 		}
