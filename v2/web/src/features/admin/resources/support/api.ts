@@ -1,0 +1,4 @@
+import {api} from "../../../../lib/api";
+export type SupportCase={id:string;job_id:string;order_id:string;category:string;description:string;status:string;resolution:string;created_at:string;version:number};
+export async function listSupport(order:string):Promise<SupportCase[]>{const rows=await api(`/api/admin/support${order?`?order_id=${encodeURIComponent(order)}`:""}`);return rows.map((x:any)=>({id:x.id??x.ID,job_id:x.job_id??x.JobID,order_id:x.order_id??x.OrderID,category:x.category??x.Category,description:x.description??x.Description,status:x.status??x.Status,resolution:x.resolution??x.Resolution,created_at:x.created_at??x.CreatedAt,version:x.version??x.Version}))}
+export function reviewSupport(selected:SupportCase,status:string,resolution:string){return api(`/api/admin/support/${encodeURIComponent(selected.id)}`,{method:"POST",body:JSON.stringify({status,resolution,version:selected.version})})}

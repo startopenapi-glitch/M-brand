@@ -1,0 +1,2 @@
+import {Component,type ReactNode} from "react";
+export class AdminBoundary extends Component<{children:ReactNode},{failed:boolean}>{state={failed:false};static getDerivedStateFromError(){return {failed:true}}render(){return this.state.failed?<div role="alert" className="notice notice-error">页面暂时无法加载，当前操作不会自动重试。<button className="ctl-btn ml-3" onClick={()=>location.reload()}>重新加载</button></div>:this.props.children}}
